@@ -97,7 +97,6 @@ switch (_side) do {
 
     case civilian: {
         _queryResult set[7,([_queryResult select 7,1] call DB_fnc_bool)];
-		 _queryResult set[13,([_queryResult select 13,1] call DB_fnc_bool)];
 
         //Parse Stats
         _new = [(_queryResult select 9)] call DB_fnc_mresToArray;
@@ -122,13 +121,14 @@ switch (_side) do {
             TON_fnc_playtime_values_request pushBack [_uid, _new];
         };
         [_uid,_new select 2] call TON_fnc_setPlayTime;
-
+		_queryResult set[13,([_queryResult select 13,1] call DB_fnc_bool)];
         _houseData = _uid spawn TON_fnc_fetchPlayerHouses;
         waitUntil {scriptDone _houseData};
         _queryResult pushBack (missionNamespace getVariable[format["houses_%1",_uid],[]]);
         _gangData = _uid spawn TON_fnc_queryPlayerGang;
         waitUntil{scriptDone _gangData};
         _queryResult pushBack (missionNamespace getVariable[format["gang_%1",_uid],[]]);
+
     };
 
     case independent: {
@@ -156,6 +156,6 @@ switch (_side) do {
 publicVariable "TON_fnc_playtime_values_request";
 
 _keyArr = missionNamespace getVariable [format["%1_KEYS_%2",_uid,_side],[]];
-_queryResult set[15,_keyArr];
+_queryResult set[16,_keyArr];
 
 _queryResult remoteExec ["SOCK_fnc_requestReceived",_ownerID];
