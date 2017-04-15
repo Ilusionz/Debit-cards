@@ -50,9 +50,15 @@ if (_mode) then {
     _purchasePrice = round(_initalPrice * _rentMultiplier);
 };
 
-private _conditions = M_CONFIG(getText,"LifeCfgVehicles",_className,"conditions");
+private _licensesName = "";
+{
+    if (!(_x isEqualTo "") && {!(LICENSE_VALUE(_x,_shopSide))}) then {
+        _licensesName = _licensesName + localize M_CONFIG(getText,"Licenses",_x,"displayName") + "<br/>";
+        private _exit = true;
+    };
+} forEach _licenses;
 
-if !([_conditions] call life_fnc_levelCheck) exitWith {hint localize "STR_Shop_Veh_NoLicense";};
+if (_exit) exitWith {hint parseText format[(localize "STR_Shop_Veh_NoLicense")+ "<br/><br/>%1",_licensesName];closeDialog 0;};
 
 private _colorIndex = lbValue[2304,(lbCurSel 2304)];
 
