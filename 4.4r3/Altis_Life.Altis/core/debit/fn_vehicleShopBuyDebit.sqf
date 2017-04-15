@@ -18,7 +18,7 @@ private _vIndex = lbValue[2302,(lbCurSel 2302)];
 private _vehicleList = M_CONFIG(getArray,"CarShops",(life_veh_shop select 0),"vehicles");
 private _shopSide = M_CONFIG(getText,"CarShops",(life_veh_shop select 0),"side");
 
-_licenses = switch (playerSide) do {
+private _licenses = switch (playerSide) do {
     case civilian: {(M_CONFIG(getArray,"LifeCfgVehicles",_className,"licenses") select 0)};
     case west: {(M_CONFIG(getArray,"LifeCfgVehicles",_className,"licenses") select 1)};
     case independent: {(M_CONFIG(getArray,"LifeCfgVehicles",_className,"licenses") select 2)};
