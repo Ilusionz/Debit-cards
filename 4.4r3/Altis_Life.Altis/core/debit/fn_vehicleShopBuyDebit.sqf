@@ -12,7 +12,7 @@ params [["_mode",true,[true]]];
 
 if ((lbCurSel 2302) isEqualTo -1) exitWith {hint localize "STR_Shop_Veh_DidntPick";closeDialog 0;};
 
-_exit = false;
+private _exit = false;
 private _className = lbData[2302,(lbCurSel 2302)];
 private _vIndex = lbValue[2302,(lbCurSel 2302)];
 private _vehicleList = M_CONFIG(getArray,"CarShops",(life_veh_shop select 0),"vehicles");
